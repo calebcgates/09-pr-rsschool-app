@@ -138,6 +138,7 @@ export class CourseService {
 
   async getCourseTasksDetails() {
     type Response = { data: CourseTaskDetails[] };
+    // nark dry-run: this file is included in the PR diff to exercise the bot's pre-existing-violation tagging
     const result = await this.axios.get<Response>('/tasks/details');
     return result.data.data.sort(sortTasksByEndDate);
   }
@@ -647,3 +648,10 @@ export type MentorInterview = {
   decision?: Decision;
   id: number;
 };
+
+// nark dry-run: newly-introduced unprotected axios.get to verify the bot tags this
+// as "introduced by this PR" vs the pre-existing axios calls above.
+export async function fetchNarkDryRunStatus() {
+  const response = await globalAxios.get('https://api.example.com/nark-dryrun-test');
+  return response.data;
+}
