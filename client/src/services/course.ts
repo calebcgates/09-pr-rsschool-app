@@ -649,9 +649,15 @@ export type MentorInterview = {
   id: number;
 };
 
-// nark dry-run: newly-introduced unprotected axios.get to verify the bot tags this
-// as "introduced by this PR" vs the pre-existing axios calls above.
+// nark dry-run: newly-introduced axios.get — now wrapped in try/catch per nark axios profile (error-4xx-5xx)
 export async function fetchNarkDryRunStatus() {
-  const response = await globalAxios.get('https://api.example.com/nark-dryrun-test');
-  return response.data;
+  try {
+    const response = await globalAxios.get('https://api.example.com/nark-dryrun-test');
+    return response.data;
+  } catch (error) {
+    if (globalAxios.isAxiosError(error)) {
+      console.error('fetchNarkDryRunStatus request failed:', error.response?.status, error.message);
+    }
+    throw error;
+  }
 }
