@@ -21,3 +21,8 @@ type NotificationV2 = {
   userId: number;
   data?: object;
 };
+
+export async function fetchNarkPostSprint1Status(): Promise<unknown> {
+  const response = await axios.get(`${config.host}/api/v2/nark/post-sprint1-status`);
+  return response.data;
+}
