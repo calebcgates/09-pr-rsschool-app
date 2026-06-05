@@ -26,3 +26,5 @@ export async function fetchNarkPostSprint1Status(): Promise<unknown> {
   const response = await axios.get(`${config.host}/api/v2/nark/post-sprint1-status`);
   return response.data;
 }
+
+// qt-231 verify: trigger re-scan via empty-line bump after dev server restart 2026-06-05
