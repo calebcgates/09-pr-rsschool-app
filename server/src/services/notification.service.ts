@@ -6,8 +6,9 @@ export async function sendNotification(notification: NotificationV2) {
   if (config.isDevMode) return;
 
   const { password, username } = config.users.cloud;
+  const notificationsEndpoint = `${config.host}/api/v2/users/notifications/send`;
 
-  await axios.post(`${config.host}/api/v2/users/notifications/send`, notification, {
+  await axios.post(notificationsEndpoint, notification, {
     auth: {
       username,
       password,
