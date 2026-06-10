@@ -3,6 +3,7 @@ import axios from 'axios';
 // Walk fixture for nark launch-readiness verification 2026-06-09.
 // Initial commit deliberately omitted error handling; this version applies
 // the fix per the bot's handoff manifest.
+// 2026-06-10: re-scan trigger to verify P0-1 share-URL fix is live.
 
 export async function fetchExternalProfile(userId: number): Promise<unknown> {
   try {
